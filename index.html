@@ -200,7 +200,14 @@
 				// if ($.isTouch)
 				// 	$('.magazine-viewport').bind('zoom.doubleTap', zoomTo);
 				// else
-				// 	$('.magazine-viewport').bind('zoom.tap', zoomTo);
+				// $('.magazine-viewport').bind('zoom.tap', zoomTo);
+
+				if ($.isTouch) {
+					$('.magazine-viewport').bind('zoom.doubleTap', zoomTo);
+				} else {
+					$('.magazine-viewport').on('dblclick', zoomTo);
+				}
+
 
 
 				// Using arrow keys to turn the page

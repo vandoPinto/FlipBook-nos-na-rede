@@ -89,6 +89,7 @@ function loadPage(page, pageElement) {
 // Zoom in / Zoom out
 
 function zoomTo(event) {
+	console.log('zoom');
 
 	setTimeout(function () {
 		if ($('.magazine-viewport').data().regionClicked) {
