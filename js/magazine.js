@@ -79,18 +79,37 @@ function addPage(page, book) {
 function loadPage(page, pageElement) {
 
 	pageElement.find('.loader').remove();
-	$.ajax({ url: 'pages/page' + page + '.html' }).
-		done(function (pageHtml) {
-			$(pageElement).html(pageHtml.replace('samples/steve-jobs/', ''));
-		});
+	// $.ajax({ url: 'pages/page' + page + '.html' }).
+	// 	done(function (pageHtml) {
+	// 		$(pageElement).html(pageHtml.replace('samples/steve-jobs/', ''));
+	// 	});
 
+	$(pageElement).load('pages/page' + page + '.html');
+
+
+}
+
+function loadScript() {
+	// Verifica se já existe o script dentro da div
+	if ($('.atividade').find('script[src="js/script.js"]').length > 0) {
+		// console.log('Script já carregado. Nada a fazer.');
+		return;
+	}
+
+	// console.log('Nenhum script encontrado. Carregando novo script.');
+
+	// Cria e insere a nova tag script
+	var scriptTag = $('<script />', {
+		type: 'text/javascript',
+		src: 'js/script.js'
+	});
+
+	scriptTag.appendTo('.atividade');
 }
 
 // Zoom in / Zoom out
 
 function zoomTo(event) {
-	console.log('zoom');
-
 	setTimeout(function () {
 		if ($('.magazine-viewport').data().regionClicked) {
 			$('.magazine-viewport').data().regionClicked = false;
@@ -104,8 +123,6 @@ function zoomTo(event) {
 	}, 1);
 
 }
-
-
 
 // Load regions
 
@@ -238,6 +255,7 @@ function isChrome() {
 }
 
 function disableControls(page) {
+
 	if (page == 1)
 		$('.previous-button').hide();
 	else
@@ -247,6 +265,8 @@ function disableControls(page) {
 		$('.next-button').hide();
 	else
 		$('.next-button').show();
+
+
 }
 
 // Set the width and height for the viewport
